@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import managers.PageObjectManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class StepDefinitions {
     FWW_Home fww_home;
+    PageObjectManager pageObjectManager;
 
     private static WebDriver driver = null;
 
@@ -42,9 +44,12 @@ public class StepDefinitions {
         System.out.println("When the user clicks the " + link + " link.");
 
         //driver.findElement(By.linkText(link)).click();
-        fww_home = new FWW_Home(driver);
+        //fww_home = new FWW_Home(driver);
+        pageObjectManager = new PageObjectManager(driver);
+        fww_home = pageObjectManager.getHomePage();
         try {
             fww_home.clickHomePageLink(link, driver);
+
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
         }
