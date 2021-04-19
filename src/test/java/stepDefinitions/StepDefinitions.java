@@ -9,10 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import pageObjects.FWW_Home;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
 public class StepDefinitions {
+    FWW_Home fww_home;
 
     private static WebDriver driver = null;
 
@@ -38,7 +41,13 @@ public class StepDefinitions {
         //throw new io.cucumber.java.PendingException();
         System.out.println("When the user clicks the " + link + " link.");
 
-        driver.findElement(By.linkText(link)).click();
+        //driver.findElement(By.linkText(link)).click();
+        fww_home = new FWW_Home(driver);
+        try {
+            fww_home.clickHomePageLink(link, driver);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("the user is taken to the {string} page")
