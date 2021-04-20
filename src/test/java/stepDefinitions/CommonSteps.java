@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import dataProviders.ConfigFileReader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,8 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
 public class CommonSteps {
-    FWW_Home fww_home;
     PageObjectManager pageObjectManager;
+    ConfigFileReader configFileReader;
+    FWW_Home fww_home;
     FWW_Battles battlesPage;
     FWW_Forums forumsPage;
     FWW_BattleFieldTours battleFieldToursPage;
@@ -31,14 +33,16 @@ public class CommonSteps {
         //throw new io.cucumber.java.PendingException();
         System.out.println("Given the user lands on the WWI page.");
 
+        configFileReader = new ConfigFileReader();
+
         FirefoxOptions options = new FirefoxOptions();
         //options.setHeadless(true);
         options.setHeadless(false);
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\JZiesel\\geckodriver260\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", configFileReader.getDriverPath()); //"C:\\Users\\JZiesel\\geckodriver260\\geckodriver.exe"
         driver = new FirefoxDriver(options);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
 
-        driver.get("https://www.firstworldwar.com/index.htm");
+        driver.get(configFileReader.getApplicationUrl());  //"https://www.firstworldwar.com/index.htm"
     }
 
     @When("clicks the {string} link")
