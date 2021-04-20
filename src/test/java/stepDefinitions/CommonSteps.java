@@ -1,25 +1,22 @@
 package stepDefinitions;
 
-import dataProviders.ConfigFileReader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import managers.FileReaderManager;
 import managers.PageObjectManager;
+import managers.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import pageObjects.*;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.TimeUnit;
 
 public class CommonSteps {
     PageObjectManager pageObjectManager;
-    ConfigFileReader configFileReader;
+    WebDriverManager webDriverManager;
     FWW_Home fww_home;
     FWW_Battles battlesPage;
     FWW_Forums forumsPage;
@@ -34,14 +31,8 @@ public class CommonSteps {
         //throw new io.cucumber.java.PendingException();
         System.out.println("Given the user lands on the WWI page.");
 
-        //configFileReader = new ConfigFileReader();
-
-        FirefoxOptions options = new FirefoxOptions();
-        //options.setHeadless(true);
-        options.setHeadless(false);
-        System.setProperty("webdriver.gecko.driver", FileReaderManager.getInstance().getConfigReader().getDriverPath());
-        driver = new FirefoxDriver(options);
-        driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance().getConfigReader().getImplicitlyWait(), TimeUnit.SECONDS);
+        webDriverManager = new WebDriverManager();
+        driver = webDriverManager.getDriver();
 
         driver.get(FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
     }
@@ -52,8 +43,6 @@ public class CommonSteps {
         //throw new io.cucumber.java.PendingException();
         System.out.println("When the user clicks the " + link + " link.");
 
-        //driver.findElement(By.linkText(link)).click();
-        //fww_home = new FWW_Home(driver);
         pageObjectManager = new PageObjectManager(driver);
         fww_home = pageObjectManager.getHomePage();
         try {
