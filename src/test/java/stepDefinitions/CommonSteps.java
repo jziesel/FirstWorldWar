@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import managers.FileReaderManager;
 import managers.PageObjectManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -33,16 +34,16 @@ public class CommonSteps {
         //throw new io.cucumber.java.PendingException();
         System.out.println("Given the user lands on the WWI page.");
 
-        configFileReader = new ConfigFileReader();
+        //configFileReader = new ConfigFileReader();
 
         FirefoxOptions options = new FirefoxOptions();
         //options.setHeadless(true);
         options.setHeadless(false);
-        System.setProperty("webdriver.gecko.driver", configFileReader.getDriverPath()); //"C:\\Users\\JZiesel\\geckodriver260\\geckodriver.exe"
+        System.setProperty("webdriver.gecko.driver", FileReaderManager.getInstance().getConfigReader().getDriverPath());
         driver = new FirefoxDriver(options);
-        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance().getConfigReader().getImplicitlyWait(), TimeUnit.SECONDS);
 
-        driver.get(configFileReader.getApplicationUrl());  //"https://www.firstworldwar.com/index.htm"
+        driver.get(FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
     }
 
     @When("clicks the {string} link")
