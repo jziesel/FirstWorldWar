@@ -15,12 +15,12 @@ import pageObjects.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
-public class StepDefinitions {
+public class CommonSteps {
     FWW_Home fww_home;
     PageObjectManager pageObjectManager;
+    FWW_Battles battlesPage;
     FWW_Forums forumsPage;
     FWW_BattleFieldTours battleFieldToursPage;
-    FWW_Battles battlesPage;
     FWW_TheItalianFront theItalianFrontPage;
 
     private static WebDriver driver = null;
@@ -97,4 +97,5 @@ public class StepDefinitions {
             e.printStackTrace();
         }
     }
+
 }
