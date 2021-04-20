@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import pageObjects.FWW_Home;
+import pageObjects.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +18,10 @@ import java.util.concurrent.TimeUnit;
 public class StepDefinitions {
     FWW_Home fww_home;
     PageObjectManager pageObjectManager;
+    FWW_Forums forumsPage;
+    FWW_BattleFieldTours battleFieldToursPage;
+    FWW_Battles battlesPage;
+    FWW_TheItalianFront theItalianFrontPage;
 
     private static WebDriver driver = null;
 
@@ -68,7 +72,6 @@ public class StepDefinitions {
         } else {
             System.out.println("DID NOT land on the " + target + " page!");
         }
-
     }
 
     @And("the browser closes")
@@ -78,5 +81,20 @@ public class StepDefinitions {
         System.out.println("And the browser closes.");
 
         driver.quit();
+    }
+
+    @And("next clicks the {string} link")
+    public void next_clicks_the_link(String link) {
+        // Write code here that turns the phrase above into concrete actions
+        //throw new io.cucumber.java.PendingException();
+
+        pageObjectManager = new PageObjectManager(driver);
+        battlesPage = pageObjectManager.getBattlesPage();
+        try {
+            battlesPage.clickBattlePageLink(link, driver);
+
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 }
