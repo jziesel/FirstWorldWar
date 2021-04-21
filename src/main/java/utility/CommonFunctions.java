@@ -1,8 +1,8 @@
 package utility;
 
 //import org.junit.Assert;
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class CommonFunctions {
@@ -19,7 +19,6 @@ public class CommonFunctions {
         }
     }
 
-/*
     public static void verifyCorrectLandingPage(WebDriver driver, String target){
         String verbiage = driver.findElement(By.xpath("/html/body")).getText();
         if (verbiage.contains(target)){  // "Please note our forum is currently not open"
@@ -29,5 +28,4 @@ public class CommonFunctions {
             System.out.println("DID NOT land on the " + target + " page!");
         }
     }
-*/
 }

@@ -10,12 +10,14 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pageObjects.*;
+import testDataTypes.Search;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class CommonSteps {
     TestContext testContext;
     FWW_Home fww_home;
+    Search search = null;
 
     private static WebDriver driver = null;
 
@@ -47,10 +49,21 @@ public class CommonSteps {
         }
     }
 
+    @When("the user enters {string} in the search box")
+    public void the_user_enters_in_the_search_box(String searchTopic) {
+        // Write code here that turns the phrase above into concrete actions
+        //throw new io.cucumber.java.PendingException();
+
+        //Search search = FileReaderManager.getInstance().getJsonReader().getSearchByName(searchTopic);
+        search = FileReaderManager.getInstance().getJsonReader().getSearchByName(searchTopic);
+        fww_home.enterSearchText(search);
+    }
+
     @Then("the user is taken to the {string} page")
     public void the_user_is_taken_to_the_page(String target) {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
+        if(search != null) target = search.fww_page;
         System.out.println("Then the user is taken to the " + target + " page.");
 
         String verbiage = driver.findElement(By.xpath("/html/body")).getText();

@@ -4,16 +4,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-//import utility.CommonFunctions;
+import testDataTypes.Search;
+import utility.CommonFunctions;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class FWW_Home {
     //final WebDriver driver;
+    private static WebDriver driver = null;
 
     public FWW_Home(WebDriver driver){
         PageFactory.initElements(driver, this);
         //this.driver = driver;
+        FWW_Home.driver = driver;
     }
 
     @FindBy(linkText = "First World War Forum")
@@ -24,6 +27,15 @@ public class FWW_Home {
 
     @FindBy(linkText = "Battles")
     private WebElement fwwBattles;
+
+    @FindBy(name = "q")
+    private WebElement search;
+
+    @FindBy(name = "btnG")
+    private WebElement searchButton;
+
+    @FindBy(xpath = "//div[@id='rso']/div/div/div/div/div/a/h3")
+    private WebElement firstSearchResultOnGoogle;
 
     public void clickFirstWorldWarForumLink(){
         //CommonFunctions.clickLink(fwwHomePageFirstWorldWarForum);
@@ -58,4 +70,18 @@ public class FWW_Home {
                 return;
             }
         }
-    }}
+    }
+
+    public void enterSearchText(Search s) {
+        search.clear();
+        search.sendKeys(s.criteria);
+        searchButton.click();
+        //Thread.sleep(1750);
+
+        //TODO: Need to implement WaitProperty here...
+        CommonFunctions.verifyCorrectLandingPage(driver, s.g_result);
+
+        firstSearchResultOnGoogle.click();
+
+    }
+}

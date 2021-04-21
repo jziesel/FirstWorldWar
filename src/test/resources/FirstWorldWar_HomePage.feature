@@ -20,3 +20,14 @@ Feature: The First World War
     Examples:
       | topic | target |
       | Battlefield Tours | Touring the Battlefields |
+
+    Scenario Outline: Search Site For Topic
+      Given the user lands on the WWI page
+      When the user enters "<search>" in the search box
+      Then the user is taken to the "<target>" page
+      And the browser closes
+
+      Examples:
+        | search | target |
+        | Search1 | json data |
+        | Search2 | json data |
