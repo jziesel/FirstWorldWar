@@ -2,7 +2,6 @@ package stepDefinitions;
 
 import cucumber.TestContext;
 import io.cucumber.java.en.And;
-//import managers.PageObjectManager;
 import org.openqa.selenium.WebDriver;
 import pageObjects.FWW_Battles;
 
@@ -26,12 +25,8 @@ public class BattlesPageSteps {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
 
-        //pageObjectManager = new PageObjectManager(driver);
-        //battlesPage = pageObjectManager.getBattlesPage();
-
         try {
             battlesPage.clickBattlePageLink(link, driver);
-            //battlesPage.clickBattlePageLink(link, testContext.getWebDriverManager().getDriver());
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
         }
