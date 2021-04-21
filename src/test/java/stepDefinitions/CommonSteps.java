@@ -68,7 +68,8 @@ public class CommonSteps {
         //throw new io.cucumber.java.PendingException();
         System.out.println("And the browser closes.");
 
-        driver.quit();
+        // The @After tag in Hooks.class takes care of this...
+        //driver.quit();
     }
 
 }
