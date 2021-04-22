@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import selenium.Wait;
 import testDataTypes.Search;
 import utility.CommonFunctions;
 
@@ -77,6 +78,7 @@ public class FWW_Home {
         search.sendKeys(s.criteria);
         searchButton.click();
         //Thread.sleep(1750);
+        Wait.untilJqueryIsDone(driver);
 
         //TODO: Need to implement WaitProperty here...
         CommonFunctions.verifyCorrectLandingPage(driver, s.g_result);
