@@ -10,6 +10,7 @@ public class PageObjectManager {
     private FWW_BattleFieldTours battleFieldToursPage;
     private FWW_Battles battlesPage;
     private FWW_TheItalianFront theItalianFrontPage;
+    private FWW_WesternFrontBattles westernFrontBattles;
 
     final WebDriver driver;
 
@@ -35,6 +36,10 @@ public class PageObjectManager {
 
     public FWW_TheItalianFront getTheItalianFrontPage(){
         return (theItalianFrontPage == null) ? theItalianFrontPage = new FWW_TheItalianFront(driver) : theItalianFrontPage;
+    }
+
+    public FWW_WesternFrontBattles getWesternFrontBattles(){
+        return (westernFrontBattles == null) ? westernFrontBattles = new FWW_WesternFrontBattles(driver) : westernFrontBattles;
     }
 
 }
