@@ -71,7 +71,7 @@ public class CommonSteps {
             Assert.assertTrue("Successully landed on the " + target + " page.", true);
             System.out.println("Successully landed on the " + target + " page.");
         } else {
-            System.out.println("DID NOT land on the " + target + " page!");
+            System.out.println("***** DID NOT land on the " + target + " page! *****");
         }
     }
 
