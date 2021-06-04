@@ -85,4 +85,27 @@ public class CommonSteps {
         //driver.quit();
     }
 
+    @And("clicks the Search button")
+    public void clicks_the_button() {
+        // Write code here that turns the phrase above into concrete actions
+        //throw new io.cucumber.java.PendingException();
+        fww_home.clickSearchButton();
+    }
+
+    @And("verifies the Google {string} results page")
+    public void verifies_the_Google_search_results_page(String searchTopic) {
+        // Write code here that turns the phrase above into concrete actions
+        //throw new io.cucumber.java.PendingException();
+
+        search = FileReaderManager.getInstance().getJsonReader().getSearchByName(searchTopic);
+        fww_home.verifySearchResultsPage(search);
+    }
+
+    @And("selects the first search result on Google page")
+    public void selects_the_first_search_result_on_Google_page(){
+        // Write code here that turns the phrase above into concrete actions
+        //throw new io.cucumber.java.PendingException();
+        fww_home.clickFirstSearchResultsLink(search);
+    }
+
 }

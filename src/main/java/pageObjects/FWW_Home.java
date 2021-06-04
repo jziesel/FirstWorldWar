@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,8 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import selenium.Wait;
 import testDataTypes.Search;
 import utility.CommonFunctions;
-
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 public class FWW_Home {
     //final WebDriver driver;
@@ -35,8 +36,9 @@ public class FWW_Home {
     @FindBy(name = "btnG")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//div[@id='rso']/div/div/div/div/div/a/h3")
+    @FindBy(xpath = "//*[@id='rso']")
     private WebElement firstSearchResultOnGoogle;
+
 
     public void clickFirstWorldWarForumLink(){
         //CommonFunctions.clickLink(fwwHomePageFirstWorldWarForum);
@@ -76,14 +78,37 @@ public class FWW_Home {
     public void enterSearchText(Search s) {
         search.clear();
         search.sendKeys(s.criteria);
+    }
+
+    public void clickSearchButton() {
         searchButton.click();
         //Thread.sleep(1750);
         Wait.untilJqueryIsDone(driver);
+    }
 
+    public void verifySearchResultsPage(Search s) {
         //TODO: Need to implement WaitProperty here...
         CommonFunctions.verifyCorrectLandingPage(driver, s.g_result);
-
-        firstSearchResultOnGoogle.click();
-
     }
+
+    public void clickFirstSearchResultsLink(Search s) {
+        //firstSearchResultOnGoogle.click();
+        ArrayList<WebElement> collLinks;
+        //collLinks = (ArrayList<WebElement>) googleCollectionOfSearchResultsLinks.findElements(By.linkText(s.g_result));
+        collLinks = (ArrayList<WebElement>) firstSearchResultOnGoogle.findElements(By.partialLinkText(s.criteria));
+        for (WebElement link : collLinks) {
+            try {
+                CommonFunctions.highLighterMethod(driver, link);
+                if(link.getAttribute("text").contains(s.g_result)){
+                    link.click();
+                    break;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Wait.untilJqueryIsDone(driver);
+    }
+
 }

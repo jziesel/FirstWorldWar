@@ -1,10 +1,7 @@
 package stepDefinitions;
 
 import cucumber.TestContext;
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
+import io.cucumber.java.*;
 //import org.apache.tools.ant.util.FileUtils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -16,6 +13,7 @@ import java.io.IOException;
 public class Hooks {
 
     TestContext testContext;
+    private String currentAppURL;
 
     public Hooks(TestContext context) {
         testContext = context;
@@ -33,11 +31,18 @@ public class Hooks {
 		*/
     }
 
+    @BeforeStep
+    public void grabCurrentURLToCompare(){
+        currentAppURL = testContext.getWebDriverManager().getDriver().getCurrentUrl();
+    }
+
     @AfterStep
     public void addScreenshot(Scenario scenario) throws IOException {
-        File screenshot = ((TakesScreenshot) testContext.getWebDriverManager().getDriver()).getScreenshotAs(OutputType.FILE);
-        byte[] fileContent = FileUtils.readFileToByteArray(screenshot);
-        scenario.attach(fileContent, "image/png", "screenshot");
+        if(!currentAppURL.contentEquals(testContext.getWebDriverManager().getDriver().getCurrentUrl())) {
+            File screenshot = ((TakesScreenshot) testContext.getWebDriverManager().getDriver()).getScreenshotAs(OutputType.FILE);
+            byte[] fileContent = FileUtils.readFileToByteArray(screenshot);
+            scenario.attach(fileContent, "image/png", "screenshot");
+        }
     }
 
     @After

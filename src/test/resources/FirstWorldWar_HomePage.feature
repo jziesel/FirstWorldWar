@@ -24,6 +24,9 @@ Feature: The First World War
     Scenario Outline: Search Site For Topic
       Given the user lands on the WWI page
       When the user enters "<search>" in the search box
+      And clicks the Search button
+      And verifies the Google "<search>" results page
+      And selects the first search result on Google page
       Then the user is taken to the "<target>" page
       And the browser closes
 
