@@ -14,13 +14,14 @@ public class Hooks {
 
     TestContext testContext;
     private String currentAppURL;
+    private Hooks hooks;
 
     public Hooks(TestContext context) {
         testContext = context;
     }
 
     @Before
-    public void SetUp() {
+    public void SetUp(Scenario scenario) {
 		/*What all you can perform here
 			Starting a webdriver
 			Setting up DB connections
@@ -29,6 +30,9 @@ public class Hooks {
 			Navigating to certain page
 			or anything before the test
 		*/
+        hooks = this;
+        testContext.setScenario(scenario);
+        testContext.setHooks(hooks);
     }
 
     @BeforeStep

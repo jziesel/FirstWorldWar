@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import com.aventstack.extentreports.Status;
 import cucumber.TestContext;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
@@ -34,7 +35,7 @@ public class HomePageSteps {
     }
 
     @Then("the user verifies there are five rotating banner articles")
-    public void the_user_verifies_there_are_five_rotating_banner_articles() {
+    public void the_user_verifies_there_are_five_rotating_banner_articles() throws IOException {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
 
@@ -76,6 +77,9 @@ public class HomePageSteps {
                 String targetUrl = (String) pair.getValue();
                 if (driver.getCurrentUrl().contentEquals(targetUrl)) {
                     System.out.println("Successfully taken to the " + targetUrl + " page");
+
+                    Hooks hooks = (Hooks) testContext.getHooks();
+                    hooks.addScreenshot(testContext.getScenario());
                 } else {
                     System.out.println("!!! Did not land on the expected page: Expected - " + targetUrl + ", " +
                             "Actual: " + driver.getCurrentUrl());
