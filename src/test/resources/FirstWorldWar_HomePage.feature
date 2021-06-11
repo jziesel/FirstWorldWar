@@ -34,3 +34,8 @@ Feature: The First World War
         | search | target |
         | Search1 | json data |
         | Search2 | json data |
+
+    Scenario: Rotating Banner
+      Given the user lands on the WWI page
+      Then the user verifies there are five rotating banner articles
+      And the browser closes
