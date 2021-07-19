@@ -1,9 +1,12 @@
 package selenium;
 
+import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import managers.FileReaderManager;
 
@@ -42,14 +45,14 @@ public class Wait {
 
 
     private static void until(WebDriver driver, Function<WebDriver, Boolean> waitCondition, Long timeoutInSeconds){
-        WebDriverWait webDriverWait = new WebDriverWait(driver, timeoutInSeconds);
-        webDriverWait.withTimeout(timeoutInSeconds, TimeUnit.SECONDS);
-        try{
-            webDriverWait.until(waitCondition);
-        }catch (Exception e){
+        FluentWait<WebDriver> wt = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class);
+        try {
+            wt.until(waitCondition);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
-
-}
+ }

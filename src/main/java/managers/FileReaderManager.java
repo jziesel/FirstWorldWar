@@ -17,6 +17,7 @@ public class FileReaderManager {
         return fileReaderManager;
     }
 
+    // Getters for the 'dataProviders'
     public ConfigFileReader getConfigReader() {
         return (configFileReader == null) ? new ConfigFileReader() : configFileReader;
     }
