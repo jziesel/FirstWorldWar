@@ -28,8 +28,8 @@ public class JsonDataReader {
         BufferedReader bufferReader = null;
         try {
             bufferReader = new BufferedReader(new FileReader(searchForTopic));
-            Search[] customers = gson.fromJson(bufferReader, Search[].class);
-            return Arrays.asList(customers);
+            Search[] searchTitles = gson.fromJson(bufferReader, Search[].class);
+            return Arrays.asList(searchTitles);
         }catch(FileNotFoundException e) {
             throw new RuntimeException("Json file not found at path : " + searchForTopic);
         }finally {
