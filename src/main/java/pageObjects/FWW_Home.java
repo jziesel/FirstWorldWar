@@ -58,6 +58,7 @@ public class FWW_Home {
     //https://www.tutorialspoint.com/list-methods-of-a-class-using-java-reflection
     //https://www.admfactory.com/execute-method-using-reflection-in-java
     // Create a collection of class webelements and determine which method to call
+    // using Reflection (see links above)
     public void clickHomePageLink(String link, WebDriver driver) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
         Class<FWW_Home> h = FWW_Home.class;
         java.lang.reflect.Method[] methods = h.getDeclaredMethods();
