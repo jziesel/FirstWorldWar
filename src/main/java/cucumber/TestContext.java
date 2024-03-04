@@ -12,9 +12,10 @@ public class TestContext {
     private WebDriverManager webDriverManager;
     private PageObjectManager pageObjectManager;
     // we don't need FileManagerReader as it is a Singleton instance
+    public ScenarioContext scenarioContext;
 
     // Begin Getter/Setter section
-    // Used to work with run-time Cucumber Scenario object
+    // Used to work with run-time Cucumber Scenario object for the Hooks.java class
     public Scenario getScenario() {
         return m_scenario;
     }
@@ -33,20 +34,23 @@ public class TestContext {
     }
     private Object m_hooks;
 
-    // Getters for 'managers' for testContext objects to use
+
+    //CStor
+    public TestContext(){
+        webDriverManager = new WebDriverManager();
+        pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
+        scenarioContext = new ScenarioContext();
+    }
+
+    // Getters for 'managers' for testContext objects to use, and for
+    // ScenarioContext
     public WebDriverManager getWebDriverManager() {
         return webDriverManager;
     }
     public PageObjectManager getPageObjectManager() {
         return pageObjectManager;
     }
+    public ScenarioContext getScenarioContext() { return scenarioContext; }
     // End Getter/Setter section
-
-
-    //CStor
-    public TestContext(){
-        webDriverManager = new WebDriverManager();
-        pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
-    }
 
 }

@@ -46,8 +46,8 @@ public class FWW_Home {
     }
 
     public void clickBattlefieldToursLink(){
-        //CommonFunctions.clickLink(fwwBattlefieldTours);
-        fwwBattlefieldTours.click();
+        CommonFunctions.clickLink(fwwBattlefieldTours);  // using the static CommonFunctions method
+        //fwwBattlefieldTours.click();  // using tbe @FindBy via PageFactory
     }
 
     public void clickBattlesLink(){

@@ -40,6 +40,10 @@ public class Hooks {
         currentAppURL = testContext.getWebDriverManager().getDriver().getCurrentUrl();
     }
 
+    /* So far, this 'Hook' is being used in the HomePageSteps class method
+    * .the_user_verifies_there_are_five_rotating_banner_articles(). This hook
+    * will take a screen capture after cycling through the Scenario Outline
+    * data elements (rows) as part of the verification of the test. */
     @AfterStep
     public void addScreenshot(Scenario scenario) throws IOException {
         if(!currentAppURL.contentEquals(testContext.getWebDriverManager().getDriver().getCurrentUrl())) {
